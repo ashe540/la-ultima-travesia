@@ -1,0 +1,1729 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>La Última Travesía de Luffy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800&family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #08111d;
+        --bg-2: #0d1a2b;
+        --card: rgba(10, 20, 34, 0.72);
+        --line: rgba(255, 255, 255, 0.12);
+        --gold: #f6c667;
+        --gold-2: #ffdf95;
+        --red: #c73c2c;
+        --red-2: #ef5c43;
+        --blue: #6cc8ff;
+        --text: #f4efe4;
+        --muted: #c9c1b2;
+        --shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+        --radius: 24px;
+        --radius-sm: 18px;
+        --max: 1240px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        font-family: "Inter", system-ui, sans-serif;
+        background: radial-gradient(
+            circle at 15% 20%,
+            rgba(246, 198, 103, 0.12),
+            transparent 25%
+          ),
+          radial-gradient(
+            circle at 80% 10%,
+            rgba(108, 200, 255, 0.11),
+            transparent 20%
+          ),
+          radial-gradient(
+            circle at 75% 80%,
+            rgba(199, 60, 44, 0.16),
+            transparent 20%
+          ),
+          linear-gradient(180deg, #08111d 0%, #0a1524 35%, #07101c 100%);
+        color: var(--text);
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        background: linear-gradient(
+            rgba(255, 255, 255, 0.03) 1px,
+            transparent 1px
+          ),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+        background-size: 40px 40px;
+        mask-image: radial-gradient(
+          circle at center,
+          black 35%,
+          transparent 100%
+        );
+        opacity: 0.25;
+      }
+
+      .rope {
+        position: fixed;
+        left: 0;
+        right: 0;
+        top: 82px;
+        height: 18px;
+        z-index: 2;
+        pointer-events: none;
+        opacity: 0.65;
+        background: repeating-linear-gradient(
+            90deg,
+            #8f6d3d 0 14px,
+            #6f532f 14px 28px
+          ),
+          linear-gradient(
+            180deg,
+            transparent 0%,
+            rgba(255, 255, 255, 0.15) 50%,
+            transparent 100%
+          );
+        box-shadow: 0 2px 0 rgba(0, 0, 0, 0.25), 0 8px 25px rgba(0, 0, 0, 0.3);
+      }
+
+      .container {
+        width: min(calc(100% - 32px), var(--max));
+        margin: 0 auto;
+        position: relative;
+        z-index: 3;
+      }
+
+      .navbar {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        backdrop-filter: blur(16px);
+        background: linear-gradient(
+          180deg,
+          rgba(7, 13, 22, 0.86),
+          rgba(7, 13, 22, 0.55)
+        );
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .nav-inner {
+        min-height: 82px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        text-decoration: none;
+        color: var(--text);
+      }
+
+      .brand-badge {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        background: radial-gradient(
+          circle at 35% 30%,
+          var(--gold-2),
+          var(--gold) 45%,
+          #7d5a20 100%
+        );
+        color: #1b1206;
+        font-size: 24px;
+        box-shadow: 0 10px 24px rgba(246, 198, 103, 0.3);
+        border: 2px solid rgba(255, 255, 255, 0.2);
+      }
+
+      .brand h1 {
+        margin: 0;
+        font-family: "Cinzel", serif;
+        font-size: 1.05rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .brand p {
+        margin: 4px 0 0;
+        color: var(--muted);
+        font-size: 0.86rem;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+        color: var(--text);
+        padding: 11px 14px;
+        border-radius: 999px;
+        border: 1px solid transparent;
+        font-weight: 600;
+        font-size: 0.95rem;
+        transition: 0.25s ease;
+      }
+
+      .nav-links a:hover {
+        border-color: rgba(255, 255, 255, 0.14);
+        background: rgba(255, 255, 255, 0.05);
+        transform: translateY(-1px);
+      }
+
+      .hero {
+        padding: 72px 0 36px;
+        position: relative;
+      }
+
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 1.08fr 0.92fr;
+        gap: 28px;
+        align-items: stretch;
+      }
+
+      .card {
+        background: linear-gradient(
+          180deg,
+          rgba(18, 29, 47, 0.86),
+          rgba(9, 18, 30, 0.76)
+        );
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .card::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.05),
+          transparent 35%,
+          transparent 60%,
+          rgba(255, 255, 255, 0.04)
+        );
+        pointer-events: none;
+      }
+
+      .hero-copy {
+        padding: 40px;
+        min-height: 560px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 24px;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        width: fit-content;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 14px;
+        border-radius: 999px;
+        border: 1px solid rgba(246, 198, 103, 0.25);
+        background: rgba(246, 198, 103, 0.08);
+        color: var(--gold-2);
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        font-size: 0.82rem;
+      }
+
+      .hero h2 {
+        margin: 0;
+        font-family: "Cinzel", serif;
+        font-size: clamp(2.4rem, 5vw, 4.8rem);
+        line-height: 0.95;
+        letter-spacing: 0.02em;
+        text-transform: uppercase;
+        text-wrap: balance;
+      }
+
+      .hero h2 span {
+        color: var(--gold-2);
+        text-shadow: 0 0 24px rgba(246, 198, 103, 0.18);
+      }
+
+      .lead {
+        margin: 0;
+        color: #e7decc;
+        font-size: 1.08rem;
+        line-height: 1.7;
+      }
+
+      .hero-meta {
+        display: flex;
+        gap: 14px;
+        flex-wrap: wrap;
+      }
+
+      .pill {
+        padding: 12px 16px;
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        font-weight: 700;
+        color: var(--text);
+      }
+
+      .cta-row {
+        display: flex;
+        gap: 14px;
+        flex-wrap: wrap;
+        margin-top: 6px;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        min-height: 52px;
+        padding: 0 22px;
+        border-radius: 999px;
+        text-decoration: none;
+        font-weight: 800;
+        border: 1px solid transparent;
+        transition: 0.25s ease;
+        cursor: pointer;
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, var(--gold-2), var(--gold));
+        color: #221606;
+        box-shadow: 0 12px 28px rgba(246, 198, 103, 0.28);
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-2px) scale(1.01);
+      }
+
+      .btn-secondary {
+        background: rgba(255, 255, 255, 0.04);
+        color: var(--text);
+        border-color: rgba(255, 255, 255, 0.1);
+      }
+
+      .btn-secondary:hover {
+        background: rgba(255, 255, 255, 0.08);
+        transform: translateY(-2px);
+      }
+
+      .hero-visual {
+        min-height: 560px;
+        padding: 24px;
+        display: grid;
+        grid-template-rows: 1fr auto;
+        gap: 22px;
+        background: radial-gradient(
+            circle at 70% 25%,
+            rgba(246, 198, 103, 0.12),
+            transparent 25%
+          ),
+          linear-gradient(180deg, rgba(16, 28, 46, 0.82), rgba(9, 17, 29, 0.88));
+      }
+
+      .wanted-board {
+        display: grid;
+        place-items: center;
+        position: relative;
+        border-radius: 22px;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        background: radial-gradient(
+            circle at 50% 35%,
+            rgba(255, 255, 255, 0.07),
+            transparent 45%
+          ),
+          linear-gradient(180deg, #17314d 0%, #12263d 55%, #0d1d31 100%);
+      }
+
+      .wanted-board::before {
+        content: "";
+        position: absolute;
+        inset: auto 10% 0;
+        height: 38%;
+        background: radial-gradient(
+          circle at 50% 0%,
+          rgba(246, 198, 103, 0.28),
+          transparent 58%
+        );
+        filter: blur(14px);
+      }
+
+      .poster {
+        width: min(88%, 380px);
+        background: linear-gradient(180deg, #f1e2bf 0%, #d9c08c 100%);
+        color: #382713;
+        border-radius: 24px 24px 30px 30px;
+        padding: 26px 26px 28px;
+        box-shadow: 0 30px 70px rgba(0, 0, 0, 0.34);
+        border: 5px solid #6f4f24;
+        transform: rotate(-5deg);
+        position: relative;
+      }
+
+      .poster::before,
+      .poster::after {
+        content: "";
+        position: absolute;
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        background: #70512a;
+        top: 16px;
+        box-shadow: inset 0 2px 3px rgba(255, 255, 255, 0.2);
+      }
+
+      .poster::before {
+        left: 16px;
+      }
+      .poster::after {
+        right: 16px;
+      }
+
+      .poster-top {
+        text-align: center;
+        font-family: "Cinzel", serif;
+        font-weight: 800;
+        letter-spacing: 0.16em;
+        font-size: 0.88rem;
+        color: #5d3d18;
+      }
+
+      .wanted {
+        text-align: center;
+        margin: 6px 0 18px;
+        font-family: "Cinzel", serif;
+        font-size: clamp(2.3rem, 4vw, 3.3rem);
+        line-height: 1;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+
+      .avatar {
+        height: 248px;
+        border-radius: 22px;
+        margin-bottom: 18px;
+        border: 4px solid rgba(91, 57, 19, 0.8);
+        background: radial-gradient(
+            circle at 50% 25%,
+            rgba(255, 255, 255, 0.25),
+            transparent 26%
+          ),
+          radial-gradient(
+            circle at 50% 100%,
+            rgba(199, 60, 44, 0.26),
+            transparent 32%
+          ),
+          linear-gradient(180deg, #20476d 0%, #183551 55%, #12263d 100%);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .avatar .hat {
+        position: absolute;
+        top: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 172px;
+        height: 52px;
+        background: #c89a35;
+        border-radius: 30px;
+        border: 4px solid #79541c;
+        box-shadow: inset 0 -10px 0 rgba(0, 0, 0, 0.13);
+      }
+
+      .avatar .hat::before {
+        content: "";
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        top: -28px;
+        width: 128px;
+        height: 56px;
+        background: #d5a841;
+        border-radius: 60px 60px 18px 18px;
+        border: 4px solid #79541c;
+      }
+
+      .avatar .hat::after {
+        content: "";
+        position: absolute;
+        inset: 16px 0 auto;
+        height: 12px;
+        background: #b42526;
+      }
+
+      .avatar .face {
+        position: absolute;
+        left: 50%;
+        top: 105px;
+        transform: translateX(-50%);
+        width: 136px;
+        height: 148px;
+        background: linear-gradient(180deg, #f8d1a8, #ecb98e);
+        border-radius: 70px 70px 60px 60px;
+        border: 4px solid rgba(0, 0, 0, 0.08);
+      }
+
+      .eye {
+        position: absolute;
+        top: 54px;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: #2d2319;
+      }
+
+      .eye.left {
+        left: 32px;
+      }
+      .eye.right {
+        right: 32px;
+      }
+
+      .scar {
+        position: absolute;
+        top: 52px;
+        left: 20px;
+        width: 16px;
+        height: 28px;
+        border-left: 3px solid #9f2e2a;
+        transform: rotate(-10deg);
+      }
+
+      .smile {
+        position: absolute;
+        left: 50%;
+        bottom: 32px;
+        width: 54px;
+        height: 22px;
+        transform: translateX(-50%);
+        border-bottom: 4px solid #6f2c1f;
+        border-radius: 0 0 40px 40px;
+      }
+
+      .poster-name {
+        text-align: center;
+        font-family: "Cinzel", serif;
+        font-size: 1.5rem;
+        font-weight: 800;
+        margin-bottom: 8px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      .poster-bounty {
+        text-align: center;
+        font-size: 1rem;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+      }
+
+      .hero-stats {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 14px;
+      }
+
+      .stat {
+        border-radius: 18px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        background: rgba(255, 255, 255, 0.04);
+        padding: 16px;
+      }
+
+      .stat .label {
+        color: var(--muted);
+        font-size: 0.85rem;
+        margin-bottom: 8px;
+      }
+
+      .stat .value {
+        font-size: 1.5rem;
+        font-weight: 800;
+      }
+
+      .section {
+        padding: 28px 0;
+      }
+
+      .section-head {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 20px;
+        margin-bottom: 20px;
+      }
+
+      .section-head h3 {
+        margin: 0;
+        font-family: "Cinzel", serif;
+        font-size: clamp(1.8rem, 3vw, 2.8rem);
+        text-transform: uppercase;
+        line-height: 1;
+      }
+
+      .section-head p {
+        margin: 0;
+        color: var(--muted);
+        max-width: 65ch;
+        line-height: 1.65;
+      }
+
+      .mission-grid {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        gap: 20px;
+      }
+
+      .mission {
+        grid-column: span 6;
+        padding: 24px;
+        min-height: 320px;
+      }
+
+      .mission:nth-child(3n + 1) {
+        background: linear-gradient(
+          180deg,
+          rgba(16, 32, 52, 0.92),
+          rgba(9, 17, 29, 0.82)
+        );
+      }
+      .mission:nth-child(3n + 2) {
+        background: linear-gradient(
+          180deg,
+          rgba(40, 22, 25, 0.9),
+          rgba(20, 12, 15, 0.84)
+        );
+      }
+      .mission:nth-child(3n + 3) {
+        background: linear-gradient(
+          180deg,
+          rgba(26, 28, 16, 0.92),
+          rgba(17, 18, 10, 0.84)
+        );
+      }
+
+      .mission-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 16px;
+      }
+
+      .mission-id {
+        width: 56px;
+        height: 56px;
+        border-radius: 18px;
+        display: grid;
+        place-items: center;
+        font-weight: 900;
+        font-size: 1.2rem;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .mission-type {
+        color: var(--gold-2);
+        font-size: 0.8rem;
+        font-weight: 800;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      .mission h4 {
+        margin: 8px 0 10px;
+        font-size: 1.4rem;
+        line-height: 1.15;
+      }
+
+      .mission p {
+        margin: 0 0 16px;
+        color: #ecdfcf;
+        line-height: 1.68;
+      }
+
+      .mission ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: grid;
+        gap: 10px;
+      }
+
+      .mission li {
+        padding: 12px 14px;
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        line-height: 1.5;
+      }
+
+      .flow-grid {
+        display: grid;
+        grid-template-columns: 1.05fr 0.95fr;
+        gap: 20px;
+      }
+
+      .timeline,
+      .judge-box,
+      .curse-box,
+      .treasure-box,
+      .kit-box,
+      .final-box {
+        padding: 24px;
+      }
+
+      .timeline-list {
+        display: grid;
+        gap: 14px;
+        margin-top: 14px;
+      }
+
+      .timeline-item {
+        display: grid;
+        grid-template-columns: 92px 1fr;
+        gap: 16px;
+        align-items: start;
+        padding: 14px;
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .timeline-item .time {
+        font-weight: 900;
+        color: var(--gold-2);
+      }
+
+      .timeline-item h5 {
+        margin: 0 0 6px;
+        font-size: 1rem;
+      }
+
+      .timeline-item p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.55;
+      }
+
+      .question-list,
+      .curse-list,
+      .treasure-list,
+      .kit-list {
+        display: grid;
+        gap: 10px;
+        margin-top: 14px;
+      }
+
+      .question-list div,
+      .curse-list div,
+      .treasure-list div,
+      .kit-list div {
+        padding: 13px 14px;
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        line-height: 1.55;
+      }
+
+      .collapsible-cheatsheet {
+        margin-top: 16px;
+        border-radius: 16px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: rgba(255, 255, 255, 0.03);
+        padding: 12px;
+      }
+
+      .collapsible-cheatsheet summary {
+        cursor: pointer;
+        font-weight: 800;
+        color: var(--gold-2);
+        letter-spacing: 0.03em;
+      }
+
+      .collapsible-cheatsheet summary::marker {
+        color: var(--gold-2);
+      }
+
+      .cheatsheet-block {
+        margin-top: 12px;
+      }
+
+      .reward-reveal {
+        margin-top: 16px;
+        margin-bottom: 14px;
+        border-radius: 16px;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        background: rgba(255, 255, 255, 0.03);
+        padding: 12px;
+      }
+
+      .reward-reveal summary {
+        cursor: pointer;
+        font-weight: 800;
+        color: var(--gold-2);
+        letter-spacing: 0.03em;
+      }
+
+      .reward-reveal summary::marker {
+        color: var(--gold-2);
+      }
+
+      .reward-image-wrap {
+        margin-top: 12px;
+        border-radius: 14px;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: rgba(0, 0, 0, 0.2);
+      }
+
+      .reward-image-wrap img {
+        width: 100%;
+        display: block;
+        height: auto;
+      }
+
+      .final-copy .cta-row {
+        margin-top: 16px;
+      }
+
+      .accent-title {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 0.85rem;
+        color: var(--gold-2);
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        margin-bottom: 12px;
+      }
+
+      .split {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+      }
+
+      .final-box {
+        display: grid;
+        grid-template-columns: 1.15fr 0.85fr;
+        gap: 20px;
+        align-items: start;
+        overflow: hidden;
+      }
+
+      .map-route {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 20px;
+      }
+
+      .pirate-map {
+        padding: 0;
+        overflow: hidden;
+      }
+
+      .map-frame {
+        position: relative;
+        min-height: 360px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .map-frame iframe {
+        width: 100%;
+        height: 100%;
+        min-height: 360px;
+        border: 0;
+        filter: saturate(0.85) contrast(1.05) sepia(0.12);
+      }
+
+      .map-frame::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background: linear-gradient(
+          180deg,
+          rgba(8, 17, 29, 0.05),
+          rgba(8, 17, 29, 0.45)
+        );
+      }
+
+      .map-caption {
+        padding: 16px 20px 18px;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+
+      .route-board {
+        border-radius: 18px;
+        padding: 14px;
+        margin-top: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: radial-gradient(
+            circle at 30% 20%,
+            rgba(246, 198, 103, 0.1),
+            transparent 36%
+          ),
+          linear-gradient(
+            180deg,
+            rgba(255, 255, 255, 0.04),
+            rgba(255, 255, 255, 0.02)
+          );
+      }
+
+      .route-board svg {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      .final-copy h4,
+      .timeline h4,
+      .judge-box h4,
+      .curse-box h4,
+      .treasure-box h4,
+      .kit-box h4 {
+        margin: 0;
+        font-size: 1.45rem;
+      }
+
+      .final-copy p,
+      .timeline p,
+      .judge-box p,
+      .curse-box p,
+      .treasure-box p,
+      .kit-box p {
+        color: var(--muted);
+        line-height: 1.68;
+      }
+
+      .coin {
+        position: relative;
+        align-self: start;
+        border-radius: 28px;
+        min-height: 290px;
+        overflow: hidden;
+        background: radial-gradient(
+            circle at 35% 25%,
+            rgba(255, 255, 255, 0.34),
+            transparent 18%
+          ),
+          radial-gradient(
+            circle at 50% 50%,
+            #f9dfa0 0%,
+            #d7a63c 55%,
+            #7b571b 100%
+          );
+        box-shadow: inset 0 0 30px rgba(255, 255, 255, 0.18),
+          inset 0 -24px 28px rgba(0, 0, 0, 0.18);
+        border: 6px solid rgba(255, 255, 255, 0.25);
+        display: grid;
+        place-items: center;
+        color: #4a310e;
+        font-family: "Cinzel", serif;
+        text-align: center;
+        padding: 20px;
+      }
+
+      .coin::before {
+        content: "☠";
+        font-size: 5rem;
+        line-height: 1;
+        display: block;
+        margin-bottom: 12px;
+      }
+
+      .coin strong {
+        display: block;
+        font-size: 1.8rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+
+      .coin span {
+        display: block;
+        margin-top: 8px;
+        font-size: 1rem;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .footer {
+        padding: 24px 0 60px;
+        color: var(--muted);
+        text-align: center;
+      }
+
+      .footer small {
+        display: block;
+        line-height: 1.7;
+      }
+
+      @media (max-width: 1080px) {
+        .hero-grid,
+        .flow-grid,
+        .map-route,
+        .split,
+        .final-box {
+          grid-template-columns: 1fr;
+        }
+
+        .mission {
+          grid-column: span 12;
+        }
+        .hero-copy,
+        .hero-visual {
+          min-height: auto;
+        }
+      }
+
+      @media (max-width: 760px) {
+        .rope {
+          top: 72px;
+        }
+        .nav-inner {
+          min-height: 72px;
+        }
+        .nav-links {
+          display: none;
+        }
+        .hero {
+          padding-top: 34px;
+        }
+        .hero-copy,
+        .hero-visual,
+        .mission,
+        .timeline,
+        .judge-box,
+        .curse-box,
+        .treasure-box,
+        .kit-box,
+        .final-box {
+          padding: 20px;
+        }
+        .hero-stats {
+          grid-template-columns: 1fr;
+        }
+        .timeline-item {
+          grid-template-columns: 1fr;
+        }
+        .poster {
+          transform: rotate(-2deg);
+        }
+        .section-head {
+          align-items: start;
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="rope"></div>
+
+    <header class="navbar">
+      <div class="container nav-inner">
+        <a class="brand" href="#top">
+          <div class="brand-badge">☠</div>
+          <div>
+            <h1>La Última Travesía</h1>
+            <p>Gymkana pirata temática One Piece</p>
+          </div>
+        </a>
+
+        <nav class="nav-links">
+          <a href="#introduccion">Introducción</a>
+          <a href="#misiones">Misiones</a>
+          <a href="#mapa">Mapa Madrid</a>
+          <a href="#juicio">Juicio Pirata</a>
+          <a href="#maldicion">Maldición</a>
+          <a href="#tesoros">Tesoros</a>
+          <a href="#final">One Piece</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="container hero-grid">
+          <article class="card hero-copy">
+            <div class="eyebrow">🏴‍☠️ Despedida legendaria · Madrid Edition</div>
+            <h2>La última <span>travesía</span> de David</h2>
+            <p class="lead">
+              Antes de abandonar la vida pirata y sellar su destino, el capitán
+              deberá superar una ruta de pruebas, castigos, interacción
+              callejera, juicios y tesoros improvisados.
+            </p>
+
+            <div class="hero-meta">
+              <div class="pill">4 tripulantes</div>
+              <div class="pill">1 capitán esposado</div>
+              <div class="pill">Modo One Piece total</div>
+            </div>
+
+            <div class="cta-row">
+              <a class="btn btn-primary" href="#misiones">Ver misiones</a>
+              <a class="btn btn-secondary" href="#juicio">Preparar el juicio</a>
+            </div>
+          </article>
+
+          <aside class="card hero-visual">
+            <div class="wanted-board">
+              <div class="poster">
+                <div class="poster-top">Departamento de la Marina</div>
+                <div class="wanted">Wanted</div>
+                <div class="avatar" aria-hidden="true">
+                  <div class="hat"></div>
+                  <div class="face">
+                    <div class="eye left"></div>
+                    <div class="eye right"></div>
+                    <div class="scar"></div>
+                    <div class="smile"></div>
+                  </div>
+                </div>
+                <div class="poster-name">Capitán Luffy</div>
+                <div class="poster-bounty">Recompensa: una boda épica</div>
+              </div>
+            </div>
+
+            <div class="hero-stats">
+              <div class="stat">
+                <div class="label">Misiones activas</div>
+                <div class="value">7</div>
+              </div>
+              <div class="stat">
+                <div class="label">Castigo global</div>
+                <div class="value">1 maldición</div>
+              </div>
+              <div class="stat">
+                <div class="label">Botín final</div>
+                <div class="value">One Piece</div>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section id="introduccion" class="section">
+        <div class="container">
+          <article class="card kit-box">
+            <div class="accent-title">🎙️ Apertura del narrador</div>
+            <p class="lead">
+              Texto preparado para leer en voz alta al inicio de la gymkana,
+              antes de lanzar la primera prueba.
+            </p>
+            <br />
+            <h4>La última travesía de Luffy</h4>
+            <p class="lead">
+              En una era dominada por el caos, donde los hombres sueñan con
+              libertad y aventura... existe un tesoro legendario: EL ONE PIECE.
+              Hoy, David, conocido como Luffy, inicia su última misión antes de
+              abandonar la vida pirata. Para demostrar que es digno de
+              convertirse en marido, deberá superar una serie de pruebas, reunir
+              aliados, conquistar territorios y demostrar su valor. Pero
+              cuidado... el camino no será fácil. La tripulación decidirá su
+              destino, y solo si supera todos los desafíos encontrará el ONE
+              PIECE.<br /><br />
+              Si logra superar cada reto con honor, humor y actitud de capitán,
+              la tripulación lo declarará digno y, por fin, encontrará el One
+              Piece. <br /><br />☠️ Que comience la aventura ☠️
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section id="misiones" class="section">
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <h3>Mapa de misiones</h3>
+            </div>
+            <p>
+              Este bloque reúne la base completa de la gymkana: reclutamiento,
+              captura, entrenamiento, tesoros, interacción con la calle,
+              maldición transversal y gran juicio final antes del premio.
+            </p>
+          </div>
+
+          <div class="mission-grid">
+            <article class="card mission">
+              <div class="mission-head">
+                <div>
+                  <div class="mission-type">Inicio social</div>
+                  <h4>Recluta a la tripulación</h4>
+                </div>
+                <div class="mission-id">01</div>
+              </div>
+              <p>
+                Antes de cualquier combate, un capitán necesita marineros. El
+                novio debe expandir su tripulación con carisma en plena calle y
+                convencer a desconocidos para unirse a la aventura.
+              </p>
+              <ul>
+                <li>
+                  Conseguir que 5 desconocidos se unan simbólicamente a su
+                  tripulación.
+                </li>
+                <li>
+                  Cada recluta debe decir en voz alta “¡Me uno a la tripulación
+                  de David!”.
+                </li>
+                <li>
+                  Registrar cada recluta con foto o vídeo corto como prueba.
+                </li>
+                <li>
+                  Bonus: conseguir al menos 1 recluta internacional o turista.
+                </li>
+              </ul>
+            </article>
+
+            <article class="card mission">
+              <div class="mission-head">
+                <div>
+                  <div class="mission-type">Misión principal</div>
+                  <h4>Captura del pirata</h4>
+                </div>
+                <div class="mission-id">02</div>
+              </div>
+              <p>
+                La Marina ha detenido a Luffy. Va esposado a un miembro de la
+                tripulación y solo podrá recuperar la libertad si demuestra
+                carisma, descaro y alma de capitán.
+              </p>
+              <ul>
+                <li>
+                  Conseguir 3 indultos de desconocidos mediante firma, vídeo o
+                  foto.
+                </li>
+                <li>
+                  Obtener una bebida, trago o invitación como soborno pirata.
+                </li>
+                <li>
+                  Gritar en público: “¡Soy Luffy y seré el Rey de los Piratas!”.
+                </li>
+                <li>
+                  Ponerse a bailar cuando cualquier miembro de la tripulación
+                  diga... GOMU GOMU NO... BAILE!
+                </li>
+              </ul>
+            </article>
+
+            <article class="card mission">
+              <div class="mission-head">
+                <div>
+                  <div class="mission-type">Prueba física</div>
+                  <h4>Entrenamiento pirata</h4>
+                </div>
+                <div class="mission-id">03</div>
+              </div>
+              <p>
+                Ningún capitán lidera la tripulación sin demostrar resistencia.
+                Aquí toca sudar, posar y levantar al grupo con energía de
+                entrenamiento shonen.
+              </p>
+              <ul>
+                <li>10 flexiones en plena calle.</li>
+                <li>
+                  Carrera corta contra un desconocido o contra un miembro del
+                  grupo.
+                </li>
+                <li>Pose épica de pirata con foto oficial.</li>
+                <li>
+                  Grito de guerra grupal para invocar la siguiente misión.
+                </li>
+              </ul>
+            </article>
+
+            <article class="card mission">
+              <div class="mission-head">
+                <div>
+                  <div class="mission-type">Interacción callejera</div>
+                  <h4>Recolector de tesoros</h4>
+                </div>
+                <div class="mission-id">04</div>
+              </div>
+              <p>
+                Un pirata de verdad sabe reunir recursos con ingenio. La clave
+                aquí es que todo sea factible, rápido y muy fácil de jugar en
+                calle sin cortar el ritmo.
+              </p>
+              <ul>
+                <li>Conseguir 1 moneda de un desconocido (se le puede devolver).</li>
+                <li>Obtener una firma en una de las camisetas tipo “Viva el novio pirata”.</li>
+                <li>Bonus: moneda extranjera o dibujo pirata improvisado.</li>
+              </ul>
+            </article>
+
+            <article class="card mission">
+              <div class="mission-head">
+                <div>
+                  <div class="mission-type">Transformación</div>
+                  <h4>La cicatriz de Luffy</h4>
+                </div>
+                <div class="mission-id">05</div>
+              </div>
+              <p>
+                El capitán debe convertirse por completo en personaje. La misión
+                consiste en conseguir que una chica le pinte la cicatriz de
+                Luffy debajo del ojo.
+              </p>
+              <ul>
+                <li>Explicar la misión con humor y carisma.</li>
+                <li>
+                  Conseguir el dibujo de la cicatriz debajo del ojo con un no
+                  permanente.
+                </li>
+                <li>Foto oficial del resultado.</li>
+                <li>Bonus: selfie grupal con la artista.</li>
+              </ul>
+            </article>
+
+            <article class="card mission">
+              <div class="mission-head">
+                <div>
+                  <div class="mission-type">Mecánica global</div>
+                  <h4>La maldición del pirata</h4>
+                </div>
+                <div class="mission-id">06</div>
+              </div>
+              <p>
+                Durante gran parte de la gymkana, el novio lleva una maldición
+                activa. Si la rompe, hay castigo inmediato. Esto mantiene el
+                caos vivo entre prueba y prueba.
+              </p>
+              <ul>
+                <li>Opción 1: hablar siempre como pirata.</li>
+                <li>Opción 2: no poder decir “sí” ni “no”.</li>
+                <li>Opción 3: cantar ciertas frases al responder.</li>
+                <li>Penalización instantánea cada vez que falle.</li>
+              </ul>
+            </article>
+
+            <article class="card mission">
+              <div class="mission-head">
+                <div>
+                  <div class="mission-type">Gran final social</div>
+                  <h4>El juicio pirata</h4>
+                </div>
+                <div class="mission-id">07</div>
+              </div>
+              <p>
+                Antes del premio, el capitán comparece ante el tribunal de la
+                Marina. Sus respuestas se enfrentan a las de la novia, que ya
+                habrá contestado previamente. Aquí se decide si es digno del One
+                Piece.
+              </p>
+              <ul>
+                <li>Un juez dirige el ritual.</li>
+                <li>Un fiscal busca hundir al acusado.</li>
+                <li>Un abogado defensor intenta salvarlo.</li>
+                <li>Cada fallo suma castigo; cada acierto, honor pirata.</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="mapa" class="section">
+        <div class="container map-route">
+          <article class="card pirate-map">
+            <div class="accent-title" style="padding: 20px 20px 0">
+              🗺️ Cartografía de la tripulación
+            </div>
+            <h4 style="padding: 0 20px; margin-top: 2px">
+              Mapa de Madrid · Ruta pirata
+            </h4>
+            <div class="map-frame">
+              <iframe
+                title="Mapa de Madrid"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                src="https://www.google.com/maps?q=Puerta+del+Sol,+Madrid&z=14&output=embed"
+              >
+              </iframe>
+            </div>
+            <div class="map-caption">
+              Punto de partida recomendado: <strong>Puerta del Sol</strong>.
+              Desde aquí podéis ir enlazando pruebas por zonas céntricas y
+              terminar cerca del punto de cena o fiesta.
+            </div>
+          </article>
+
+          <article class="card kit-box">
+            <div class="accent-title">☠️ Trayectoria del botín</div>
+            <h4>Ruta sugerida (modo pergamino)</h4>
+            <p>
+              Itinerario pensado para mantener ritmo y ambientación: inicio
+              fuerte, pruebas de calle, juicio y cierre épico.
+            </p>
+            <div class="route-board">
+              <svg
+                viewBox="0 0 440 300"
+                role="img"
+                aria-label="Ruta pirata por Madrid"
+              >
+                <path
+                  d="M35 45 C95 35, 125 90, 175 92 C235 95, 250 50, 305 72 C360 94, 368 152, 330 188 C300 216, 242 222, 220 255 C200 282, 142 276, 108 245 C74 214, 86 168, 126 148 C170 126, 190 170, 230 172 C280 175, 300 128, 347 130"
+                  fill="none"
+                  stroke="#f6c667"
+                  stroke-width="4"
+                  stroke-linecap="round"
+                  stroke-dasharray="8 8"
+                />
+                <circle cx="35" cy="45" r="8" fill="#ef5c43" />
+                <circle cx="175" cy="92" r="8" fill="#6cc8ff" />
+                <circle cx="305" cy="72" r="8" fill="#ef5c43" />
+                <circle cx="330" cy="188" r="8" fill="#6cc8ff" />
+                <circle cx="220" cy="255" r="8" fill="#ef5c43" />
+                <circle cx="108" cy="245" r="8" fill="#6cc8ff" />
+                <circle cx="126" cy="148" r="8" fill="#ef5c43" />
+                <circle cx="230" cy="172" r="8" fill="#6cc8ff" />
+                <circle cx="347" cy="130" r="10" fill="#f6c667" />
+                <text x="48" y="48" fill="#f4efe4" font-size="13">
+                  Sol · Inicio
+                </text>
+                <text x="184" y="86" fill="#f4efe4" font-size="13">
+                  Plaza Mayor
+                </text>
+                <text x="315" y="67" fill="#f4efe4" font-size="13">
+                  La Latina
+                </text>
+                <text x="338" y="183" fill="#f4efe4" font-size="13">
+                  Lavapiés
+                </text>
+                <text x="230" y="250" fill="#f4efe4" font-size="13">
+                  Atocha
+                </text>
+                <text x="118" y="240" fill="#f4efe4" font-size="13">
+                  Retiro
+                </text>
+                <text x="136" y="143" fill="#f4efe4" font-size="13">
+                  Gran Vía
+                </text>
+                <text x="240" y="167" fill="#f4efe4" font-size="13">
+                  Chueca
+                </text>
+                <text
+                  x="358"
+                  y="124"
+                  fill="#f6c667"
+                  font-size="14"
+                  font-weight="700"
+                >
+                  One Piece
+                </text>
+              </svg>
+            </div>
+            <div class="kit-list">
+              <div>
+                <strong>Tramo 1:</strong> Sol → Plaza Mayor (activación y
+                captura).
+              </div>
+              <div>
+                <strong>Tramo 2:</strong> La Latina → Lavapiés (misiones
+                sociales y tesoros).
+              </div>
+              <div>
+                <strong>Tramo 3:</strong> Atocha → Retiro (pruebas físicas y
+                fotos).
+              </div>
+              <div>
+                <strong>Final:</strong> Gran Vía/Chueca para juicio y
+                recompensa.
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container flow-grid">
+          <article class="card timeline">
+            <div class="accent-title">⏱ Orden recomendado</div>
+            <h4>Flujo ideal de la gymkana</h4>
+            <p>
+              Pensado para ir calentando el ambiente, usar la maldición como
+              hilo conductor y cerrar en alto antes de la cena o el tardeo
+              fuerte.
+            </p>
+            <div class="timeline-list">
+              <div class="timeline-item">
+                <div class="time">Inicio</div>
+                <div>
+                  <h5>Recluta a la tripulación</h5>
+                  <p>
+                    Luffy debe conseguir 5 desconocidos que se unan oficialmente
+                    a su tripulación.
+                  </p>
+                </div>
+              </div>
+              <div class="timeline-item">
+                <div class="time">+15 min</div>
+                <div>
+                  <h5>Captura del pirata</h5>
+                  <p>
+                    Esposas, liberación pública, baile, soborno e interacción
+                    fuerte con la calle.
+                  </p>
+                </div>
+              </div>
+              <div class="timeline-item">
+                <div class="time">+40 min</div>
+                <div>
+                  <h5>Activar la maldición</h5>
+                  <p>
+                    Se comunica la regla principal y el grupo entra oficialmente
+                    en modo tripulación.
+                  </p>
+                </div>
+              </div>
+              <div class="timeline-item">
+                <div class="time">+60 min</div>
+                <div>
+                  <h5>Recolector de tesoros</h5>
+                  <p>
+                    Prueba breve, ágil y muy efectiva para encadenar risas sin
+                    parar el ritmo.
+                  </p>
+                </div>
+              </div>
+              <div class="timeline-item">
+                <div class="time">+80 min</div>
+                <div>
+                  <h5>Entrenamiento pirata</h5>
+                  <p>
+                    Momento físico, fotos épicas y subida de energía grupal.
+                  </p>
+                </div>
+              </div>
+              <div class="timeline-item">
+                <div class="time">+100 min</div>
+                <div>
+                  <h5>La cicatriz de Luffy</h5>
+                  <p>
+                    Transformación visual y misión con interacción simpática.
+                  </p>
+                </div>
+              </div>
+              <div class="timeline-item">
+                <div class="time">Final</div>
+                <div>
+                  <h5>Juicio pirata</h5>
+                  <p>
+                    Gran escena final antes del premio, la cena o la entrada en
+                    fase de fiesta.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article id="juicio" class="card judge-box">
+            <div class="accent-title">⚖️ Tribunal de la Marina</div>
+            <h4>Preguntas base para el juicio pirata</h4>
+            <p>
+              Estas preguntas se responden previamente con la novia. Luego el
+              novio debe contestarlas en directo. Se pueden usar tal cual como
+              primera versión antes de hacer una edición más cabrona o más
+              emotiva.
+            </p>
+            <div class="question-list">
+              <div>¿Dónde os conocisteis?</div>
+              <div>¿Quién dio el primer paso?</div>
+              <div>¿Cuál fue vuestra primera cita?</div>
+              <div>¿Cuántos Pokémon hay en la Pokédex original de Kanto?</div>
+              <div>¿Qué es lo que más le gusta de ti?</div>
+              <div>¿Qué es lo que menos le gusta de ti?</div>
+              <div>¿Quién tarda más en arreglarse?</div>
+              <div>¿Quién manda realmente?</div>
+              <div>¿Cuáles son las evoluciones clásicas de Eevee?</div>
+              <div>¿Quién es más desordenado?</div>
+              <div>¿Quién pide perdón primero?</div>
+              <div>¿Cuántos hijos quiere?</div>
+              <div>¿Dónde le gustaría vivir?</div>
+              <div>¿Qué tipo de Pokémon tiene inmunidad a tipo Eléctrico?</div>
+              <div>¿Cuál es vuestro viaje soñado juntos?</div>
+            </div>
+
+            <details class="collapsible-cheatsheet">
+              <summary>Respuestas y chuleta (solo para jueces)</summary>
+              <div class="cheatsheet-block question-list">
+                <div><strong>Pokédex original Kanto:</strong> 151 Pokémon.</div>
+                <div>
+                  <strong>Eevee evoluciones clásicas:</strong> Piedra Agua
+                  (Vaporeon), Piedra Trueno (Jolteon), Piedra Fuego (Flareon).
+                </div>
+                <div>
+                  <strong>Mayor Velocidad base no legendaria de Kanto:</strong>
+                  Electrode (140).
+                </div>
+                <div>
+                  <strong>Inmunidad a tipo Eléctrico:</strong> tipo Tierra.
+                </div>
+                <div>
+                  <strong>Mayor Ataque base no legendario de Kanto:</strong>
+                  Dragonite (134).
+                </div>
+                <div>
+                  <strong>Mayor Defensa base no legendaria de Kanto:</strong>
+                  Cloyster (180).
+                </div>
+              </div>
+            </details>
+          </article>
+        </div>
+      </section>
+
+      <!-- <section class="section">
+      <div class="container split">
+        <article id="maldicion" class="card curse-box">
+          <div class="accent-title">🧠 Caos transversal</div>
+          <h4>Opciones de maldición</h4>
+          <p>
+            Elegid una para toda la sesión o id cambiándola por fases. La mejor es la que genere errores frecuentes pero
+            mantenga la diversión sin romper demasiado la dinámica.
+          </p>
+          <div class="curse-list">
+            <div><strong>Modo pirata:</strong> el novio debe hablar como pirata siempre que responda.</div>
+            <div><strong>Palabras prohibidas:</strong> no puede decir “sí” ni “no”.</div>
+            <div><strong>Modo musical:</strong> algunas respuestas deben ser cantadas.</div>
+            <div><strong>Castigo automático:</strong> cada fallo implica shot, reto o penalización inmediata.</div>
+          </div>
+        </article>
+
+        <article id="tesoros" class="card treasure-box">
+          <div class="accent-title">🪙 Botín factible</div>
+          <h4>Tesoros recomendados</h4>
+          <p>
+            Objetos sencillos, rápidos y realistas para pedir por la calle sin frenar el plan ni generar situaciones raras.
+          </p>
+          <div class="treasure-list">
+            <div>1 moneda cualquiera.</div>
+            <div>1 servilleta firmada por un desconocido.</div>
+            <div>1 frase escrita tipo “Viva el novio pirata”.</div>
+            <div>Bonus: dibujo pirata o moneda extranjera.</div>
+          </div>
+        </article>
+      </div>
+    </section> -->
+
+      <!-- <section class="section">
+      <div class="container split">
+        <article class="card kit-box">
+          <div class="accent-title">🎒 Preparación de tripulación</div>
+          <h4>Kit de ejecución</h4>
+          <p>
+            Todo lo necesario para que esta página no sea solo estética, sino una base lista para usarse sobre el terreno.
+          </p>
+          <div class="kit-list">
+            <div>Esposas de juguete o accesorio visual similar.</div>
+            <div>Camisetas Wanted ya preparadas.</div>
+            <div>Rotulador o eyeliner para la cicatriz de Luffy.</div>
+            <div>Móvil con batería y powerbank para grabarlo todo.</div>
+            <div>Un miembro del grupo como juez / maestro de ceremonias.</div>
+            <div>Lista previa de respuestas de la novia para el juicio.</div>
+          </div>
+        </article>
+
+        <article class="card kit-box">
+          <div class="accent-title">🎬 Clave audiovisual</div>
+          <h4>Qué merece grabarse sí o sí</h4>
+          <p>
+            Hay momentos que luego pueden convertirse en vídeo para la boda o en recap privado del grupo. Este bloque marca
+            las escenas con más potencial.
+          </p>
+          <div class="kit-list">
+            <div>La activación oficial de la maldición.</div>
+            <div>La captura con esposas y la liberación ceremonial.</div>
+            <div>El discurso “Seré el Rey de los Piratas”.</div>
+            <div>La carrera, las flexiones y la pose épica.</div>
+            <div>El momento en que le dibujan la cicatriz.</div>
+            <div>Las respuestas del juicio y el veredicto final.</div>
+          </div>
+        </article>
+      </div>
+    </section> -->
+
+      <section id="final" class="section">
+        <div class="container">
+          <article class="card final-box">
+            <div class="final-copy">
+              <div class="accent-title">🏆 Recompensa final</div>
+              <h4>El One Piece</h4>
+              <p>
+                Tras sobrevivir a la Marina, superar el entrenamiento, reunir
+                tesoros y defender su honor en el tribunal, el capitán alcanza
+                el final de la travesía. Aquí encaja perfecto el regalo, la
+                botella, el discurso del grupo o el giro emocional antes de
+                pasar a cena y fiesta.
+              </p>
+              <details class="reward-reveal">
+                <summary>Desvelar recompensa final</summary>
+                <div class="reward-image-wrap">
+                  <img
+                    src="https://i.etsystatic.com/15618348/r/il/667c76/4345340183/il_fullxfull.4345340183_nr8u.jpg"
+                    alt="Recompensa final de la gymkana pirata"
+                    loading="lazy"
+                    referrerpolicy="no-referrer"
+                  />
+                </div>
+              </details>
+              <div class="cta-row">
+                <a class="btn btn-primary" href="#top">Volver arriba</a>
+              </div>
+            </div>
+            <div class="coin">
+              <div>
+                <strong>One Piece</strong>
+                <span>Solo para piratas dignos</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <small>
+          La Última Travesía de Luffy · Diseño temático One Piece para despedida
+          de soltero
+        </small>
+      </div>
+    </footer>
+  </body>
+</html>
